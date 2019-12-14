@@ -9,6 +9,9 @@ namespace Pong_Monogame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //
+        SpriteFont gameFont;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,6 +30,8 @@ namespace Pong_Monogame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            gameFont = Content.Load<SpriteFont>("Fonts/GameFont");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -42,9 +47,14 @@ namespace Pong_Monogame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(gameFont, "Hello, World!", new Vector2(100, 100), Color.White);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
