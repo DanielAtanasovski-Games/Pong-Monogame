@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Pong_Monogame.Objects;
+using PongMonogame.GUI;
+using PongMonogame.World;
 
 namespace Pong_Monogame
 {
@@ -9,11 +12,25 @@ namespace Pong_Monogame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //
+        // Singleton
+        public static Game1 self;
+
+        // Load Resource 
+        // TODO: Seperate this out to class specifics
         SpriteFont gameFont;
+        Texture2D ballSprite;
+
+        // Objects
+        // TODO: Move this to Match Class
+        Background line;
+        Pong player;
+        Ball ball;
+        
+        Menu menu;
 
         public Game1()
         {
+            self = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -21,8 +38,11 @@ namespace Pong_Monogame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            line = new Background(new Vector2(0, 0), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
+            player = new Pong(new Vector2(20, 100), new Vector2(10, 40));
+            // Menu
+            menu = new Menu(graphics);
+           
             base.Initialize();
         }
 
@@ -30,9 +50,19 @@ namespace Pong_Monogame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            gameFont = Content.Load<SpriteFont>("Fonts/GameFont");
+            //gameFont = Content.Load<SpriteFont>("Fonts/GameFont");
+            ballSprite = Content.Load<Texture2D>("Sprites/Ball");
 
-            // TODO: use this.Content to load your game content here
+            ball = new Ball(new Vector2(200, 150), 16, ballSprite);
+
+            menu.LoadContent(Content);
+
+            OnLoadContentDone();
+        }
+
+        private void OnLoadContentDone()
+        {
+            menu.Init();
         }
 
         protected override void Update(GameTime gameTime)
@@ -40,7 +70,9 @@ namespace Pong_Monogame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            //player.Update(gameTime);
+            //ball.Update(gameTime);
+            menu.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -49,10 +81,14 @@ namespace Pong_Monogame
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(gameFont, "Hello, World!", new Vector2(100, 100), Color.White);
+            menu.Draw(spriteBatch);
+
+            //spriteBatch.DrawString(gameFont, "Hello, World!", new Vector2(100, 100), Color.White);
+            //line.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
+            //ball.Draw(spriteBatch);
 
             spriteBatch.End();
 

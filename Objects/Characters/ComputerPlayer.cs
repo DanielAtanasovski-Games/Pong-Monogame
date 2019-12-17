@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PongMonogame.World
+namespace PongMonogame.Objects.Characters
 {
-    class Background
+    class ComputerPlayer : IPlayer
     {
     }
 }

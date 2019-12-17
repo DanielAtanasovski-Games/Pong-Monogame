@@ -6,12 +6,9 @@ using System.Text;
 
 namespace PongMonogame.Objects
 {
-    public interface IObject
+    public interface IObject : IUpdate, IDraw
     {
         Vector2 Position { get; set; }
         Vector2 Size { get; set; }
-
-        void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch);
     }
 }

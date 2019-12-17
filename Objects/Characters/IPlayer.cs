@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pong_Monogame.Objects
+namespace PongMonogame.Objects
 {
-    class Pong
-{
-}
+    class IPlayer
+    {
+    }
 }

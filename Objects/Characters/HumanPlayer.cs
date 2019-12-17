@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pong_Monogame.Objects
+namespace PongMonogame.Objects.Characters
 {
-    class Ball
+    class HumanPlayer : IPlayer
     {
     }
 }
