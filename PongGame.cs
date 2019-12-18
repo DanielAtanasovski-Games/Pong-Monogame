@@ -3,23 +3,24 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Pong_Monogame.Objects;
 using PongMonogame.GUI;
+using PongMonogame.System;
 using PongMonogame.World;
 
 namespace Pong_Monogame
 {
-    public class Game1 : Game
+    public class PongGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         // Singleton
-        public static Game1 self;
+        public static PongGame Instance;
 
         // Load Resource 
         // TODO: Seperate this out to class specifics
         SpriteFont gameFont;
         Texture2D ballSprite;
-
+        
         // Objects
         // TODO: Move this to Match Class
         Background line;
@@ -28,9 +29,9 @@ namespace Pong_Monogame
         
         Menu menu;
 
-        public Game1()
+        public PongGame()
         {
-            self = this;
+            Instance = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -72,6 +73,7 @@ namespace Pong_Monogame
 
             //player.Update(gameTime);
             //ball.Update(gameTime);
+            Input.instance.Update(gameTime);
             menu.Update(gameTime);
 
             base.Update(gameTime);

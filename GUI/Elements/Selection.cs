@@ -16,15 +16,20 @@ namespace PongMonogame.GUI.Elements
         public SpriteFont Font { get; set; }
         public int SelectionNum { get; set; }
 
+        // TODO:
+        public Action Callback{ get; set; }
+        
+
         private readonly Color selectedColor = Color.Red;
         private readonly Color defaultColor = Color.White;
 
-        public Selection(string Text, Vector2 Position , SpriteFont Font, bool Selected = false)
+        public Selection(string Text, Vector2 Position , SpriteFont Font, Action Callback, bool Selected = false)
         {
             this.Text = Text;
             this.Selected = Selected;
             this.Font = Font;
             this.Position = Position;
+            this.Callback = Callback;
         }
 
         public void Draw(SpriteBatch spriteBatch)
