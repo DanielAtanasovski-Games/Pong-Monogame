@@ -5,8 +5,9 @@ using System.Text;
 
 namespace PongMonogame.Objects
 {
-    public interface ILoadContent
+    public interface IContent
     {
-        void LoadContent(ContentManager Content);
+        void Load(ContentManager Content);
+        void UnLoad(ContentManager Content);
     }
 }

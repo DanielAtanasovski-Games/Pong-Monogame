@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PongMonogame.Objects;
@@ -39,6 +40,16 @@ namespace Pong_Monogame.Objects
             {
                 Position = new Vector2(Position.X, Position.Y + MoveSpeed);
             }
+        }
+
+        public void Load(ContentManager Content)
+        {
+            
+        }
+
+        public void UnLoad(ContentManager Content)
+        {
+            
         }
     }
 }

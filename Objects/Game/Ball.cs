@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Content;
 
 namespace Pong_Monogame.Objects
 {
@@ -71,6 +72,16 @@ namespace Pong_Monogame.Objects
             {
                 Direction = new Vector2(Direction.X, -Direction.Y);
             }
+        }
+
+        public void Load(ContentManager Content)
+        {
+            
+        }
+
+        public void UnLoad(ContentManager Content)
+        {
+            
         }
     }
 }

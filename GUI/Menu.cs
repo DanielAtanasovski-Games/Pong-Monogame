@@ -12,13 +12,19 @@ using System.Text;
 
 namespace PongMonogame.GUI
 {
-    class Menu : IUpdate, IDraw, ILoadContent
+    class Menu : IUpdate, IDraw, IContent, IState
     {
+        // TODO: UPDATE THIS TO USE STATES!
+        // MAIN MENU -> GAME SETTINGS MENU -> GAME -> MATCH RESULTS / STATS / REMATCH
+        // EACH A DIFFERENT CLASS
+        // MENU -> MENU -> MATCH -> MENU
+
         private GraphicsDeviceManager graphics;
 
         // Fonts
         private SpriteFont TitleFont;
         private SpriteFont MenuFont;
+
         // Options
         private Vector2 middlePoint;
         private List<Selection> menuOptions;
@@ -29,15 +35,18 @@ namespace PongMonogame.GUI
         List<Keys> DOWN_KEYS = new List<Keys>() { Keys.Down, Keys.S };
         List<Keys> ENTER_KEYS = new List<Keys>() { Keys.Enter, Keys.Space };
 
-        public Menu(GraphicsDeviceManager graphics)
+        public IState NextState { get; set; }
+        public StateManager Manager { get; set; }
+
+        public Menu(GraphicsDeviceManager graphics, StateManager Manager)
         {
             this.graphics = graphics;
-
+            this.Manager = Manager;
 
             middlePoint = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
         }
 
-        public void LoadContent(ContentManager Content)
+        public void Load(ContentManager Content)
         {
             // Fonts
             TitleFont = Content.Load<SpriteFont>("Fonts/TitleFont");
@@ -56,6 +65,7 @@ namespace PongMonogame.GUI
 
         public void Draw(SpriteBatch spriteBatch)
         {
+
             DrawOptions(spriteBatch);
         }
 
@@ -122,12 +132,32 @@ namespace PongMonogame.GUI
 
         public void Play()
         {
-            
+            //TODO: GOTO GAME SETTINGS MENU (1VCPU,1V1)
+            gameMatch = new Match(Manager, this);
+            NextState = gameMatch;
+            Manager.NextState();
         }
 
         public void Quit()
         {
             PongGame.Instance.Exit();
+        }
+
+        public void Load()
+        {
+            // Fonts
+            TitleFont = Manager.Content.Load<SpriteFont>("Fonts/TitleFont");
+            MenuFont = Manager.Content.Load<SpriteFont>("Fonts/MenuFont");
+        }
+
+        public void Unload()
+        {
+            
+        }
+
+        public void UnLoad(ContentManager Content)
+        {
+            
         }
     }
 }

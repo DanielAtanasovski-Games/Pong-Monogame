@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PongMonogame.Objects
 {
-    public interface IObject : IUpdate, IDraw
+    public interface IObject : IUpdate, IDraw, IContent
     {
         Vector2 Position { get; set; }
         Vector2 Size { get; set; }

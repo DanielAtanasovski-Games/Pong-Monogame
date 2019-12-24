@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PongMonogame.Objects;
 using System;
@@ -7,8 +8,9 @@ using System.Text;
 
 namespace PongMonogame.World
 {
-    class Background : IObject { 
-    
+    class Background : IObject
+    {
+
         public Background(Vector2 position, Vector2 size)
         {
             Position = position;
@@ -35,9 +37,19 @@ namespace PongMonogame.World
             spriteBatch.Draw(lineTex, new Rectangle((int)(Position.X + Size.X) - 4, (int)Position.Y, (int)(Size.X), (int)(Size.Y)), Color.White);
         }
 
+        public void Load(ContentManager Content)
+        {
+
+        }
+
+        public void UnLoad(ContentManager Content)
+        {
+
+        }
+
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
