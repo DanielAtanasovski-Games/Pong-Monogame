@@ -9,8 +9,8 @@ namespace PongMonogame.Objects.Characters
 {
     class ComputerPlayer : IPlayer
     {
-        public Vector2 Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Vector2 Size { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Vector2 Position { get; set; }
+        public Vector2 Size { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -22,7 +22,7 @@ namespace PongMonogame.Objects.Characters
             throw new NotImplementedException();
         }
 
-        public void UnLoad(ContentManager Content)
+        public void Unload(ContentManager Content)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Pong_Monogame;
 using Pong_Monogame.Objects;
@@ -18,10 +19,9 @@ namespace PongMonogame.System
         public IPlayer Player1 { get; set; }
         public IPlayer Player2 { get; set; }
         public StateManager Manager { get; set; }
-        public IState NextState { get; set; }
         public List<IObject> objectList = new List<IObject>();
 
-        public Match(StateManager Manager, IState nextState)
+        public Match(StateManager Manager)
         {
             this.Manager = Manager;
         }
@@ -44,7 +44,7 @@ namespace PongMonogame.System
             objectList.Add(Player2);
         }
 
-        public void Load()
+        public void Load(ContentManager Content)
         {
             foreach (IObject o in objectList)
             {
@@ -53,11 +53,11 @@ namespace PongMonogame.System
             
         }
 
-        public void Unload()
+        public void Unload(ContentManager Content)
         {
             foreach (IObject o in objectList)
             {
-                o.UnLoad(Manager.Content);
+                o.Unload(Manager.Content);
             }
         }
 

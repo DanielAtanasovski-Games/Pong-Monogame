@@ -79,7 +79,7 @@ namespace Pong_Monogame.Objects
             
         }
 
-        public void UnLoad(ContentManager Content)
+        public void Unload(ContentManager Content)
         {
             
         }

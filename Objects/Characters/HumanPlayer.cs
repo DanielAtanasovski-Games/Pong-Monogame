@@ -57,24 +57,14 @@ namespace PongMonogame.Objects.Characters
             }
         }
 
-        public void PositionInBounds(Vector2 position)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ObjectInBounds(Vector2 position, Vector2 size)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Load(ContentManager Content)
         {
             throw new NotImplementedException();
         }
 
-        public void UnLoad(ContentManager Content)
+        public void Unload(ContentManager Content)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

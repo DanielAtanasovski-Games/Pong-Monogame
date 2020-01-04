@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using PongMonogame.GUI;
 using PongMonogame.Objects;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,31 @@ namespace PongMonogame.System
 {
     public class MenuManager : StateManager, IState, IUpdate, IDraw
     {
-        public MenuManager(ContentManager Content) : base(Content)
-        {
-            // TODO MIGHT NOT BE NECESSARY SINCE PONG IS A SMALL GAME
-            // BUT THIS COULD REPRESENT THE MAIN MENU AND THE DIFFERENT SCREENS (OPTIONS / CONTROLS / CREDITS)
-        }
-
+        // Handles (TitleScreen ?) -> MainMenu -> Game Options
         public StateManager Manager { get; set; }
-        IState IState.NextState { get; set; }
+        private MainMenu mainMenu;
+
+        public MenuManager(ContentManager Content, StateManager Manager) : base(Content)
+        {
+            this.Manager = Manager;
+
+            mainMenu = new MainMenu(this);
+            CurrentState = mainMenu;
+        }
 
         public void Init()
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void Load()
+        public void Load(ContentManager Content) 
         {
-            throw new NotImplementedException();
+            LoadCurrentState();
         }
 
-        public void Unload()
+        public void Unload(ContentManager Content) 
         {
-            throw new NotImplementedException();
+            UnloadCurrentState();
         }
 
     }

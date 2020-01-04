@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -39,7 +40,7 @@ namespace Pong_Monogame
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            Manager = new GameManager(Content, Graphics);
+            Manager = new GameManager(Content);
         }
 
         protected override void Initialize()
@@ -69,10 +70,7 @@ namespace Pong_Monogame
 
         protected override void Update(GameTime gameTime)
         {
-            //player.Update(gameTime);
-            //ball.Update(gameTime);
             Input.instance.Update(gameTime);
-            //menu.Update(gameTime);
             Manager.Update(gameTime);
 
             base.Update(gameTime);
@@ -85,15 +83,17 @@ namespace Pong_Monogame
             spriteBatch.Begin();
 
             Manager.Draw(spriteBatch);
-            //menu.Draw(spriteBatch);
-            //spriteBatch.DrawString(gameFont, "Hello, World!", new Vector2(100, 100), Color.White);
-            //line.Draw(spriteBatch);
-            //player.Draw(spriteBatch);
-            //ball.Draw(spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            Manager.UnloadCurrentState();
+            base.OnExiting(sender, args);
+        }
+
     }
 }

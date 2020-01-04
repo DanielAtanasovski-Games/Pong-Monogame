@@ -8,6 +8,6 @@ namespace PongMonogame.Objects
     public interface IContent
     {
         void Load(ContentManager Content);
-        void UnLoad(ContentManager Content);
+        void Unload(ContentManager Content);
     }
 }
