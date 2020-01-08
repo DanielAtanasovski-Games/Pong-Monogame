@@ -21,8 +21,8 @@ namespace PongMonogame.System
                 return false;
             } else
             {
-                objectA.OnCollisionExit();
-                objectB.OnCollisionExit();
+                objectA.OnCollisionExit(objectB);
+                objectB.OnCollisionExit(objectA);
                 return true;
             }
 

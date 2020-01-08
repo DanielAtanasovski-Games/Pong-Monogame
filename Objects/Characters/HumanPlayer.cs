@@ -10,12 +10,6 @@ using System.Diagnostics;
 
 namespace PongMonogame.Objects.Characters
 {
-    public enum CharacterSize
-    {
-        Small,
-        Medium,
-        Large
-    }
     class HumanPlayer : IPlayer
     {
         Match Match;
@@ -26,7 +20,7 @@ namespace PongMonogame.Objects.Characters
         public string Tag { get; set; }
         public int ID { get; set; }
 
-        public HumanPlayer(int ID, Match Match, Vector2 Position, Vector2 Size, int MoveSpeed = 10)
+        public HumanPlayer(int ID, Match Match, Vector2 Position, Vector2 Size, int MoveSpeed = 5)
         {
             this.ID = ID;
             this.Match = Match;
@@ -36,7 +30,7 @@ namespace PongMonogame.Objects.Characters
             Tag = "player";
         }
 
-        public HumanPlayer(int ID, Match Match, Vector2 Position, CharacterSize Size, int MoveSpeed = 10)
+        public HumanPlayer(int ID, Match Match, Vector2 Position, CharacterSize Size, int MoveSpeed = 5)
         {
             this.ID = ID;
             this.Match = Match;
@@ -105,14 +99,14 @@ namespace PongMonogame.Objects.Characters
             
         }
 
-        public void OnCollisionEnter()
+        public void OnCollisionEnter(ICollidableObject other)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void OnCollisionExit()
+        public void OnCollisionExit(ICollidableObject other)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

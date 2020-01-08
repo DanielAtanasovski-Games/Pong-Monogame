@@ -7,6 +7,21 @@ using PongMonogame.Objects.Characters;
 
 namespace PongMonogame.Objects
 {
+    public enum CharacterSize
+    {
+        Small,
+        Medium,
+        Large
+    }
+
+    public enum PlayerStartingPosition
+    {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
+
     public interface IPlayer : ICollidableObject
     {
         
@@ -27,5 +42,23 @@ namespace PongMonogame.Objects
             return retSize;
         }
         // TODO: Controls that will be passed in from menu (as user can change controls)
+
+        void AdjustPlayerPosition(PlayerStartingPosition startingAdjust)
+        {
+            switch (startingAdjust)
+            {
+                case PlayerStartingPosition.Left:
+                    break;
+                case PlayerStartingPosition.Right:
+                    Position = new Vector2(Position.X - Size.X, Position.Y);
+                    break;
+                case PlayerStartingPosition.Top:
+                    break;
+                case PlayerStartingPosition.Bottom:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

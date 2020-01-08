@@ -10,6 +10,7 @@ namespace PongMonogame.Objects
     {
         int ID { get; set; }
         string Tag { get; set; }
+
         Vector2 Position { get; set; }
         Vector2 Size { get; set; }
     }

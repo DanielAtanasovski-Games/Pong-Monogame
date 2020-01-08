@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Text;
 using MonoGame.Extended;
 using Microsoft.Xna.Framework.Content;
-using System.Text.RegularExpressions;
+using PongMonogame.System;
+using System.Diagnostics;
 
 namespace Pong_Monogame.Objects
 {
-    class Ball : IObject
+    class Ball : ICollidableObject
     {
         public Vector2 Position { get; set; }
         public Vector2 Direction { get; set; }
@@ -23,29 +24,28 @@ namespace Pong_Monogame.Objects
         private Match Match { get; set; }
         public int ID { get; set; }
 
-        public Ball(int ID, Match Match, Vector2 Position, float Radius, Texture2D sprite)
+        public Ball(int ID, Match Match, Vector2 Position, float Radius, float Speed = 6)
         {
             this.ID = ID;
             this.Match = Match;
             this.Position = Position;
             this.Radius = Radius;
             this.Size = new Vector2(this.Radius, this.Radius);
-            this.sprite = sprite;
+            //this.sprite = sprite;
             this.Direction = GetRandomDirection();
-            this.Speed = 1f;
+            this.Speed = Speed;
             Tag = "ball";
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.DrawCircle(Position, Radius, 8, Color.White);
-            spriteBatch.Draw(sprite, new Rectangle(Position.ToPoint(), Size.ToPoint()), Color.White);
+            spriteBatch.DrawCircle(Position, Radius, 8, Color.White);
+            //spriteBatch.Draw(sprite, new Rectangle(Position.ToPoint(), Size.ToPoint()), Color.White);
         }
 
         public void Update(GameTime gameTime)
         {
-            MoveInDirection(Direction);
-            CollisionCheck();
+            MoveInDirection();
         }
 
         private Vector2 GetRandomDirection()
@@ -61,24 +61,20 @@ namespace Pong_Monogame.Objects
             return dir;
         }
 
-        private void MoveInDirection(Vector2 direction)
+        private void MoveInDirection()
         {
-            Vector2 newPos = Direction * Speed;
-            Position += newPos;
-        }
-
-        private void CollisionCheck()
-        {
-            //TODO: GET THE WIDTH AND HEIGHT FROM MANAGER CLASS (TODO)
-            if (Position.X <= 0 || Position.X >= 400)
+            if (Position.X <= Match.MatchSize.X || Position.X >= Match.MatchSize.Z)
             {
                 Direction = new Vector2(-Direction.X, Direction.Y);
             }
 
-            if (Position.Y <= 0 || Position.Y >= 400)
+            if (Position.Y <= Match.MatchSize.Y || Position.Y >= Match.MatchSize.W)
             {
                 Direction = new Vector2(Direction.X, -Direction.Y);
             }
+
+            Vector2 newPos = Direction * Speed;
+            Position += newPos;
         }
 
         public void Load(ContentManager Content)
@@ -89,6 +85,21 @@ namespace Pong_Monogame.Objects
         public void Unload(ContentManager Content)
         {
             
+        }
+
+        public void OnCollisionEnter(ICollidableObject other)
+        {
+            if (!other.Tag.Equals("player"))
+                return;
+
+
+            //TODO: Identify where the ball hit on the player to apply a directional modifier
+
+            Direction = new Vector2(-Direction.X, Direction.Y);
+        }
+
+        public void OnCollisionExit(ICollidableObject other)
+        {
         }
     }
 }

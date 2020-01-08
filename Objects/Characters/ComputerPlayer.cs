@@ -24,12 +24,12 @@ namespace PongMonogame.Objects.Characters
             throw new NotImplementedException();
         }
 
-        public void OnCollisionEnter()
+        public void OnCollisionEnter(ICollidableObject other)
         {
             throw new NotImplementedException();
         }
 
-        public void OnCollisionExit()
+        public void OnCollisionExit(ICollidableObject other)
         {
             throw new NotImplementedException();
         }

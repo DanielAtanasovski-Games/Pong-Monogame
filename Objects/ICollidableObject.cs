@@ -60,10 +60,10 @@ namespace PongMonogame.Objects
 
         bool ObjectInBounds(ICollidableObject otherObject)
         {
-            return ObjectInBounds(otherObject.Position, otherObject.Position);
+            return ObjectInBounds(otherObject.Position, otherObject.Size);
         }
 
-        void OnCollisionEnter();
-        void OnCollisionExit();
+        void OnCollisionEnter(ICollidableObject other);
+        void OnCollisionExit(ICollidableObject other);
     }
 }
