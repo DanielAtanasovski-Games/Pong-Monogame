@@ -11,6 +11,8 @@ namespace PongMonogame.Objects.Characters
     {
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
+        public string Tag { get; set; }
+        public int ID { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -18,6 +20,16 @@ namespace PongMonogame.Objects.Characters
         }
 
         public void Load(ContentManager Content)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCollisionEnter()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCollisionExit()
         {
             throw new NotImplementedException();
         }

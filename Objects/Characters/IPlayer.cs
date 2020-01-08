@@ -9,6 +9,7 @@ namespace PongMonogame.Objects
 {
     public interface IPlayer : ICollidableObject
     {
+        
         Vector2 CalculateSize (CharacterSize size)
         {
             Vector2 retSize = Vector2.Zero;

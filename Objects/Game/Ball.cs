@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using MonoGame.Extended;
 using Microsoft.Xna.Framework.Content;
+using System.Text.RegularExpressions;
 
 namespace Pong_Monogame.Objects
 {
@@ -18,15 +19,21 @@ namespace Pong_Monogame.Objects
 
         private Texture2D sprite;
         public float Speed { get; set; }
+        public string Tag { get; set; }
+        private Match Match { get; set; }
+        public int ID { get; set; }
 
-        public Ball(Vector2 Position, float Radius, Texture2D sprite)
+        public Ball(int ID, Match Match, Vector2 Position, float Radius, Texture2D sprite)
         {
+            this.ID = ID;
+            this.Match = Match;
             this.Position = Position;
             this.Radius = Radius;
             this.Size = new Vector2(this.Radius, this.Radius);
             this.sprite = sprite;
             this.Direction = GetRandomDirection();
             this.Speed = 1f;
+            Tag = "ball";
         }
 
         public void Draw(SpriteBatch spriteBatch)

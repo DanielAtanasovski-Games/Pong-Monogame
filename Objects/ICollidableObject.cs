@@ -7,6 +7,7 @@ namespace PongMonogame.Objects
 {
     public interface ICollidableObject : IObject
     {
+        // FACT: Rectangles are considered Collidable in this game
         // Checks a Particular Point
         bool PositionInBounds(Vector2 otherPosition)
         {
@@ -38,9 +39,31 @@ namespace PongMonogame.Objects
             return true;
         }
 
+        bool ObjectInBounds(Rectangle otherRec)
+        {
+            Vector2 otherPosition = new Vector2(otherRec.X, otherRec.Y);
+            Vector2 otherSize = new Vector2(otherRec.Width, otherRec.Height);
+            // Right or Left
+            if (otherPosition.X > (Position.X + Size.X) || (otherPosition.X + otherSize.X) < Position.X)
+            {
+                return false;
+            }
+
+            // Above or below
+            if (otherPosition.Y > (Position.Y + Size.Y) || (otherPosition.Y + otherSize.Y) < Position.Y)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         bool ObjectInBounds(ICollidableObject otherObject)
         {
             return ObjectInBounds(otherObject.Position, otherObject.Position);
         }
+
+        void OnCollisionEnter();
+        void OnCollisionExit();
     }
 }
